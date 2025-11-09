@@ -22,7 +22,7 @@ export default function BlogLayout({
         style={{ willChange: 'opacity' }}
       />
       <span
-        className="pointer-events-none fixed top-0 block h-[800px] w-full select-none bg-[radial-gradient(103.72%_46.58%_at_50%_0%,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0)_100%)] opacity-0 dark:opacity-100 transition-opacity duration-200"
+        className="pointer-events-none fixed top-0 block h-[800px] w-full select-none bg-[radial-gradient(103.72%_46.58%_at_50%_0%,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0)_100%)] opacity-0 dark:opacity-100 transition-opacity duration-200"
         style={{ willChange: 'opacity' }}
       />
 

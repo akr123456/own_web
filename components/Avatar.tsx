@@ -1,9 +1,13 @@
+"use client"
+
 import { type ComponentProps } from '@zolplay/react'
 import { clsxm } from '@zolplay/utils'
 import Image from 'next/image'
 import Link, { type LinkProps } from 'next/link'
+import { useTheme } from 'next-themes'
 
-import portraitImage from '~/assets/Portrait.png'
+import portraitLightImage from '~/assets/Portrait-light.png'
+import portraitDarkImage from '~/assets/Portrait-dark.png'
 import portraitAltImage from '~/assets/PortraitAlt.jpg'
 
 function AvatarContainer({ className, ...props }: ComponentProps) {
@@ -31,6 +35,9 @@ function AvatarImage({
   alt,
   ...props
 }: AvatarImageProps) {
+  const { theme, resolvedTheme } = useTheme()
+  const activeTheme = resolvedTheme ?? theme
+  const isDark = activeTheme === 'dark'
   return (
     <Link
       aria-label="主页"
@@ -39,7 +46,7 @@ function AvatarImage({
       {...props}
     >
       <Image
-        src={alt ? portraitAltImage : portraitImage}
+        src={alt ? portraitAltImage : isDark ? portraitDarkImage : portraitLightImage}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsxm(
