@@ -6,8 +6,8 @@ import Image from 'next/image'
 import Link, { type LinkProps } from 'next/link'
 import { useTheme } from 'next-themes'
 
-import portraitLightImage from '~/assets/Portrait-light.png'
 import portraitDarkImage from '~/assets/Portrait-dark.png'
+import portraitLightImage from '~/assets/Portrait-light.png'
 import portraitAltImage from '~/assets/PortraitAlt.jpg'
 
 function AvatarContainer({ className, ...props }: ComponentProps) {
