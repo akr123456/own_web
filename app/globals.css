@@ -76,6 +76,15 @@ body::before {
   animation-duration: var(--bg-scroll-duration);
 }
 
+/* 使用白天/黑夜位图替换原先的 SVG，白天使用 light.png，黑夜使用 dark.jpg（位于 public/） */
+body::before {
+  background-image: url('/light.png');
+}
+
+html.dark body::before {
+  background-image: url('/dark.jpg');
+}
+
 @keyframes bg-translate {
   0% {
     transform: translate3d(0, 0, 0);
