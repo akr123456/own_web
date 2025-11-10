@@ -25,14 +25,14 @@ function NavItem({
         className={clsxm(
           'relative block whitespace-nowrap px-3 py-2 transition',
           isActive
-            ? 'text-lime-600 dark:text-lime-400'
-            : 'hover:text-lime-600 dark:hover:text-lime-400'
+            ? 'text-[#011EFF] dark:text-[#FEFE2B]'
+            : 'hover:text-[#011EFF] dark:hover:text-[#FEFE2B]'
         )}
       >
         {children}
         {isActive && (
           <motion.span
-            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
+            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-[#011EFF]/0 via-[#011EFF]/70 to-[#011EFF]/0 dark:from-[#FEFE2B]/0 dark:via-[#FEFE2B]/40 dark:to-[#FEFE2B]/0"
             layoutId="active-nav-item"
           />
         )}
@@ -63,11 +63,11 @@ function Desktop({
     <nav
       onMouseMove={handleMouseMove}
       className={clsxm(
-        'group relative',
-        'rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90',
+  'group relative',
+  'rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90',
         'shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md',
         'dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10',
-        '[--spotlight-color:rgb(236_252_203_/_0.6)] dark:[--spotlight-color:rgb(217_249_157_/_0.07)]',
+  '[--spotlight-color:rgb(1 30 255 / 0.6)] dark:[--spotlight-color:rgb(254 254 43 / 0.07)]',
         className
       )}
       {...props}

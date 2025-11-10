@@ -52,6 +52,20 @@ module.exports = {
           '--tw-prose-td-borders': 'var(--tw-prose-invert-td-borders)',
         },
       },
+      // override Tailwind's lime palette to use the project-wide yellow (#FEFE2B)
+      lime: {
+        50: '#fffef8',
+        100: '#fffde6',
+        200: '#fffccd',
+        300: '#fffaa3',
+        400: '#fff87a',
+        500: '#FEFE2B',
+        600: '#e5e523',
+        700: '#bfb41a',
+        800: '#999110',
+        900: '#73700b',
+        950: '#3a3504',
+      },
       DEFAULT: {
         css: {
           '--tw-prose-body': theme('colors.zinc.600'),
