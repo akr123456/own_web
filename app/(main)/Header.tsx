@@ -155,6 +155,40 @@ export function Header() {
 
   return (
     <>
+      {/* 非首页顶部色块 - 白天模式使用#FEFE2B，黑夜模式使用#B0FA41，高度略微增大 */}
+      {!isHomePage && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
+          <div className="flex w-full max-w-7xl lg:px-8">
+            <motion.div
+              className="h-[240px] w-full bg-[#FEFE2B] dark:bg-[#B0FA41] opacity-90 z-50 relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.9 }}
+              transition={{
+                type: 'spring',
+                damping: 30,
+                stiffness: 200,
+              }}
+            >
+              {/* 黑色色块 - 长度(水平)缩短1/4(变为3/32)，宽度(竖直)变为最初的两倍(1/10)，减少移动距离 */}
+              {/* 移除了head-bg.png图片 */}
+
+              {/* 黑色色块 */}
+              <div className="absolute bottom-[5px] left-[5px] w-[calc(100%*1/8)] h-[calc(100%*1/15)] bg-[#1b1b09] z-60"></div>
+
+              {/* 紧靠黑色色块放置Diagonal-long.png */}
+              <div className="absolute bottom-[5px] left-[calc(5px+100%*1/8)] z-60">
+                <img src="/Diagonal-long.png" alt="Diagonal Long" className="h-[calc(100%*1/15)]" />
+              </div>
+
+              {/* 保持原有的Diagonal-BLOG.png */}
+              <div className="absolute bottom-[calc(5px+100%*1/15+3px+2px)] left-[calc(5px+100%*1/8+5px+2px)] z-60">
+                <img src="/Diagonal-BLOG.png" alt="Diagonal BLOG" className="h-[calc(100%*1/1000)]" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      )}
+
       <motion.header
         className={clsxm(
           'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col',

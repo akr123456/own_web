@@ -28,7 +28,7 @@ export const metadata = {
 
 export default function AskMeAnythingPage() {
   return (
-    <Container className="mt-[8.5rem] sm:mt-[10.5rem] md:mt-[11.5rem]">
+    <Container className="mt-32 sm:mt-48">
       <header className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
           Ask Me Anything / 一对一咨询

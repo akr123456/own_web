@@ -39,3 +39,18 @@ html.dark {
     opacity: 0;
   }
 }
+
+@keyframes scroll-banner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-banner {
+  animation: scroll-banner 40s linear infinite;
+  width: 200%; /* 确保容器宽度是图片的两倍，实现无缝滚动 */
+  display: flex;
+}
