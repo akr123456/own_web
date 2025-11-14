@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function FootprintsPage() {
   return (
-    <Container className="mt-16 sm:mt-32">
+    <Container className="mt-[8.5rem] sm:mt-[10.5rem] md:mt-[11.5rem]">
       <header className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
           我的足迹记录

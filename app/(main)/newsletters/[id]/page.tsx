@@ -63,7 +63,7 @@ export default async function NewsletterRenderPage({
   }
 
   return (
-    <Container className="mt-16">
+  <Container className="mt-16">
       <article className="prose mx-auto max-w-[500px] dark:prose-invert">
         <ReactMarkdown>{newsletter.body}</ReactMarkdown>
       </article>

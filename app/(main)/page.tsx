@@ -14,7 +14,7 @@ export default async function BlogHomePage() {
 
   return (
     <>
-      <Container className="mt-10">
+      <Container className="mt-[8.5rem] sm:mt-[10.5rem] md:mt-[11.5rem]">
         <Headline />
       </Container>
 

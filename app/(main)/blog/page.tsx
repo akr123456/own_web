@@ -24,7 +24,7 @@ export const metadata = {
 // TODO: add pagination or infinite scroll
 export default function BlogPage() {
   return (
-    <Container className="mt-16 sm:mt-24">
+  <Container className="mt-[8.5rem] sm:mt-[10.5rem] md:mt-[11.5rem]">
       <header className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
           欢迎光临我的博客
