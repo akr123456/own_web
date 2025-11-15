@@ -177,7 +177,7 @@ export function Header() {
               <div className="absolute bottom-[3px] left-0 w-[calc(100%*1/8*7/8*9/10)] h-[calc(100%*1/15)] bg-[#1b1b09] z-60"></div>
 
               {/* 页面名称 - 使用BLOG.svg替代文字 */}
-                <div className="absolute bottom-[5px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
+              <div className="absolute bottom-[5px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
                 {pathname === '/blog' || pathname.startsWith('/blog/') ? (
                   <img src="/BLOG.svg" alt="BLOG" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
                 ) :
@@ -233,7 +233,7 @@ export function Header() {
                     WebkitBackgroundClip: 'text',
                     // 增加浏览器兼容性前缀
                     WebkitTextFillColor: 'transparent',
-                    textFillColor: 'transparent',
+
                     // 设置文字透明以显示背景纹理
                     color: 'transparent',
                     // 确保纹理不会被截断
@@ -243,7 +243,7 @@ export function Header() {
                     // 提高文字渲染质量
                     textRendering: 'optimizeLegibility',
                     // 防止文本像素化
-                    imageRendering: 'optimizeQuality',
+                    imageRendering: "pixelated",
                     // 添加硬件加速以提高性能和稳定性
                     transform: 'translateZ(0)',
                     // 防止抗锯齿问题
