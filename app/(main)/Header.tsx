@@ -31,7 +31,8 @@ import { Tooltip } from '~/components/ui/Tooltip'
 import { url } from '~/lib'
 import { clamp } from '~/lib/math'
 export function Header() {
-  const isHomePage = usePathname() === '/'
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   const headerRef = React.useRef<HTMLDivElement>(null)
   const avatarRef = React.useRef<HTMLDivElement>(null)
@@ -180,10 +181,22 @@ export function Header() {
                 <img src="/Diagonal-long.png" alt="Diagonal Long" className="h-[calc(100%*1/15)]" />
               </div>
 
-              {/* 保持原有的Diagonal-BLOG.png */}
-              <div className="absolute bottom-[calc(5px+100%*1/15+3px+2px)] left-[calc(5px+100%*1/8+5px+2px)] z-60">
-                <img src="/Diagonal-BLOG.png" alt="Diagonal BLOG" className="h-[calc(100%*1/1000)]" />
-              </div>
+              {/* 根据页面路径显示不同的图片 */}
+                <div className="absolute bottom-[calc(5px+100%*1/15+3px+2px)] left-[calc(5px+100%*1/8+5px+2px)] z-60">
+                  <img 
+                    src={
+                      // 按特定页面顺序排列，确保精确匹配
+                      pathname === '/blog' || pathname.startsWith('/blog/') ? '/Diagonal-BLOG.png' :
+                      pathname === '/footprints' || pathname.startsWith('/footprints/') ? '/Diagonal-FOOTPRINTS.png' :
+                      pathname === '/collections' || pathname.startsWith('/collections/') ? '/Diagonal-COLLECTIONS.png' :
+                      pathname === '/ama' || pathname.startsWith('/ama/') || pathname === '/contact' || pathname.startsWith('/contact/') ? '/Diagonal-CONTACT.png' :
+                      pathname === '/projects' || pathname.startsWith('/projects/') ? '/Diagonal-PROJECTS.png' :
+                      '/Diagonal-BLOG.png'
+                    } 
+                    alt="Page specific diagonal" 
+                    className="h-[calc(100%*1/1000)]" 
+                  />
+                </div>
             </motion.div>
           </div>
         </div>
