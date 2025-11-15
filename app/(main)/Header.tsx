@@ -189,7 +189,8 @@ export function Header() {
                       pathname === '/blog' || pathname.startsWith('/blog/') ? '/Diagonal-BLOG.png' :
                       pathname === '/footprints' || pathname.startsWith('/footprints/') ? '/Diagonal-FOOTPRINTS.png' :
                       pathname === '/collections' || pathname.startsWith('/collections/') ? '/Diagonal-COLLECTIONS.png' :
-                      pathname === '/ama' || pathname.startsWith('/ama/') || pathname === '/contact' || pathname.startsWith('/contact/') ? '/Diagonal-CONTACT.png' :
+                      pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? '/Diagonal-GUESTBOOK.png' :
+                      pathname === '/contact' || pathname.startsWith('/contact/') ? '/Diagonal-CONTACT.png' :
                       pathname === '/projects' || pathname.startsWith('/projects/') ? '/Diagonal-PROJECTS.png' :
                       '/Diagonal-BLOG.png'
                     } 

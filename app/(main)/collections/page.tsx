@@ -20,7 +20,7 @@ export const metadata = {
   },
 } satisfies Metadata
 
-export default function FavoritesPage() {
+export default function CollectionsPage() {
   return (
     <Container className="mt-32 sm:mt-48">
       <header className="max-w-2xl">

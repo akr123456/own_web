@@ -26,7 +26,7 @@ export const metadata = {
   },
 }
 
-export default function AskMeAnythingPage() {
+export default function ContactPage() {
   return (
     <Container className="mt-32 sm:mt-48">
       <header className="max-w-2xl">

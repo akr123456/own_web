@@ -63,11 +63,13 @@ export default authMiddleware({
     '/projects',
     '/footprints',
     '/favorites',
+    '/collections', // 添加新路径
     '/guestbook',
     '/newsletters(.*)',
     '/about',
     '/rss',
     '/feed',
     '/ama',
+    '/contact', // 添加新路径
   ],
 })
