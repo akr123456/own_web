@@ -173,31 +173,93 @@ export function Header() {
               {/* 黑色色块 - 长度(水平)缩短1/4(变为3/32)，宽度(竖直)变为最初的两倍(1/10)，减少移动距离 */}
               {/* 移除了head-bg.png图片 */}
 
-              {/* 黑色色块 */}
-              <div className="absolute bottom-[5px] left-[5px] w-[calc(100%*1/8)] h-[calc(100%*1/15)] bg-[#1b1b09] z-60"></div>
+              {/* 黑色色块 - 左边缘与黄色块重合，向下移动，长度缩短1/8后再缩短1/10 */}
+              <div className="absolute bottom-[3px] left-0 w-[calc(100%*1/8*7/8*9/10)] h-[calc(100%*1/15)] bg-[#1b1b09] z-60"></div>
 
-              {/* 紧靠黑色色块放置Diagonal-long.png */}
-              <div className="absolute bottom-[5px] left-[calc(5px+100%*1/8)] z-60">
+              {/* 页面名称 - 使用BLOG.svg替代文字 */}
+                <div className="absolute bottom-[5px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
+                {pathname === '/blog' || pathname.startsWith('/blog/') ? (
+                  <img src="/BLOG.svg" alt="BLOG" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) :
+                  pathname === '/footprints' || pathname.startsWith('/footprints/') ? 'FOOTPRINTS' :
+                    pathname === '/collections' || pathname.startsWith('/collections/') ? 'COLLECTIONS' :
+                      pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? 'GUESTBOOK' :
+                        pathname === '/contact' || pathname.startsWith('/contact/') ? 'CONTACT' :
+                          pathname === '/projects' || pathname.startsWith('/projects/') ? 'PROJECTS' :
+                            'PAGE'}
+              </div>
+
+              {/* 紧靠黑色色块放置Diagonal-long.png - 下移与黑色色块对齐 */}
+              <div className="absolute bottom-[3px] left-[calc(100%*1/8)] z-60">
                 <img src="/Diagonal-long.png" alt="Diagonal Long" className="h-[calc(100%*1/15)]" />
               </div>
 
-              {/* 根据页面路径显示不同的图片 */}
-                <div className="absolute bottom-[calc(5px+100%*1/15+3px+2px)] left-[calc(5px+100%*1/8+5px+2px)] z-60">
-                  <img 
-                    src={
-                      // 按特定页面顺序排列，确保精确匹配
-                      pathname === '/blog' || pathname.startsWith('/blog/') ? '/Diagonal-BLOG.png' :
-                      pathname === '/footprints' || pathname.startsWith('/footprints/') ? '/Diagonal-FOOTPRINTS.png' :
-                      pathname === '/collections' || pathname.startsWith('/collections/') ? '/Diagonal-COLLECTIONS.png' :
-                      pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? '/Diagonal-GUESTBOOK.png' :
-                      pathname === '/contact' || pathname.startsWith('/contact/') ? '/Diagonal-CONTACT.png' :
-                      pathname === '/projects' || pathname.startsWith('/projects/') ? '/Diagonal-PROJECTS.png' :
-                      '/Diagonal-BLOG.png'
-                    } 
-                    alt="Page specific diagonal" 
-                    className="h-[calc(100%*1/1000)]" 
+              {/* 直接在页面上放置SVG文件 */}
+              <div className="absolute bottom-[30px] left-[calc(100%*1/8-15px)] z-[1000] overflow-visible">
+                {pathname === '/blog' || pathname.startsWith('/blog/') ? (
+                  // 对于blog页面，直接放置Diagonal-BLOG.svg文件
+                  <img
+                    src="/Diagonal-BLOG.svg"
+                    alt="BLOG SVG"
+                    style={{
+                      // 设置明确的尺寸确保可见
+                      height: '120px',
+                      width: 'auto',
+                      // 确保SVG正确显示
+                      display: 'block',
+                      // 确保层级最高
+                      zIndex: 1000
+                    }}
                   />
-                </div>
+                ) : (
+                  // 对于其他页面，继续使用PNG纹理渲染
+                  <div style={{
+                    // 设置文字基础样式
+                    fontSize: '12rem',
+                    fontWeight: 'bold',
+                    fontFamily: 'ChillDuanSans_Bold.otf, sans-serif',
+                    // 使用PNG纹理图片作为背景
+                    backgroundImage: 'url(/Diagonal.png)',
+                    // 确保背景填充
+                    backgroundRepeat: 'repeat',
+                    // 调整背景大小以适应文字和提高渲染稳定性
+                    backgroundSize: '20px 20px',
+                    // 固定背景位置以减少缩放时的位移
+                    backgroundPosition: 'center',
+                    // 设置背景附着方式以提高稳定性
+                    backgroundAttachment: 'fixed',
+                    // 关键属性：将背景应用到文字上
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    // 增加浏览器兼容性前缀
+                    WebkitTextFillColor: 'transparent',
+                    textFillColor: 'transparent',
+                    // 设置文字透明以显示背景纹理
+                    color: 'transparent',
+                    // 确保纹理不会被截断
+                    overflow: 'visible',
+                    // 设置显示方式
+                    display: 'inline-block',
+                    // 提高文字渲染质量
+                    textRendering: 'optimizeLegibility',
+                    // 防止文本像素化
+                    imageRendering: 'optimizeQuality',
+                    // 添加硬件加速以提高性能和稳定性
+                    transform: 'translateZ(0)',
+                    // 防止抗锯齿问题
+                    willChange: 'transform',
+                    // 添加轻微轮廓以确保在任何缩放级别都能看到文字
+                    WebkitTextStroke: '0.5px rgba(0,0,0,0.1)'
+                  }}>
+                    {pathname === '/footprints' || pathname.startsWith('/footprints/') ? 'FOOTPRINTS' :
+                      pathname === '/collections' || pathname.startsWith('/collections/') ? 'COLLECTIONS' :
+                        pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? 'GUESTBOOK' :
+                          pathname === '/contact' || pathname.startsWith('/contact/') ? 'CONTACT' :
+                            pathname === '/projects' || pathname.startsWith('/projects/') ? 'PROJECTS' :
+                              'PAGE'}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </div>
         </div>
