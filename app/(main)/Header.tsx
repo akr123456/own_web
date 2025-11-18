@@ -170,37 +170,42 @@ export function Header() {
                 stiffness: 200,
               }}
             >
-              {/* 黑色色块 - 长度(水平)缩短1/4(变为3/32)，宽度(竖直)变为最初的两倍(1/10)，减少移动距离 */}
-              {/* 移除了head-bg.png图片 */}
+              {/* 移除了单独的黑色色块，因为它已经被融入到SVG中 */}
 
-              {/* 黑色色块 - 左边缘与黄色块重合，向下移动，长度缩短1/8后再缩短1/10 */}
-              <div className="absolute bottom-[3px] left-0 w-[calc(100%*1/8*7/8*9/10)] h-[calc(100%*1/15)] bg-[#1b1b09] z-60"></div>
-
-              {/* 页面名称 - 使用BLOG.svg替代文字 */}
-              <div className="absolute bottom-[5px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
+              {/* 页面名称 - 统一使用SVG替代文字 */}
+              <div className="absolute bottom-[0px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
                 {pathname === '/blog' || pathname.startsWith('/blog/') ? (
-                  <img src="/BLOG.svg" alt="BLOG" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) :
-                  pathname === '/footprints' || pathname.startsWith('/footprints/') ? 'FOOTPRINTS' :
-                    pathname === '/collections' || pathname.startsWith('/collections/') ? 'COLLECTIONS' :
-                      pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? 'GUESTBOOK' :
-                        pathname === '/contact' || pathname.startsWith('/contact/') ? 'CONTACT' :
-                          pathname === '/projects' || pathname.startsWith('/projects/') ? 'PROJECTS' :
-                            'PAGE'}
+                  <>
+                    <img src="/triangle.svg" alt="triangle" style={{ position: 'absolute', top: '-65px', left: '5px', zIndex: 1002, display: 'block', height: '100px', width: '100px' }} />
+                    <img src="/BLOG.svg" alt="BLOG" style={{ height: '100px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                  </>
+                ) : pathname === '/footprints' || pathname.startsWith('/footprints/') ? (
+                  <img src="/FOOTPRINTS.svg" alt="FOOTPRINTS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) : pathname === '/collections' || pathname.startsWith('/collections/') ? (
+                  <img src="/COLLECTIONS.svg" alt="COLLECTIONS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) : pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? (
+                  <img src="/GUESTBOOK.svg" alt="GUESTBOOK" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) : pathname === '/contact' || pathname.startsWith('/contact/') ? (
+                  <img src="/CONTACT.svg" alt="CONTACT" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) : pathname === '/projects' || pathname.startsWith('/projects/') ? (
+                  <img src="/PROJECTS.svg" alt="PROJECTS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                ) : (
+                  'PAGE'
+                )}
               </div>
 
-              {/* 紧靠黑色色块放置Diagonal-long.png - 下移与黑色色块对齐 */}
-              <div className="absolute bottom-[3px] left-[calc(100%*1/8)] z-60">
-                <img src="/Diagonal-long.png" alt="Diagonal Long" className="h-[calc(100%*1/15)]" />
+              {/* 向右下方移动与黑色色块上下居中对齐，并调整长度与黄色块一致 */}
+              <div className="absolute bottom-[-66px] left-0 w-full z-60">
+                <img src="/Diagonal-long.svg" alt="Diagonal Long" className="h-40 w-full" />
               </div>
 
               {/* 直接在页面上放置SVG文件 */}
               <div className="absolute bottom-[30px] left-[calc(100%*1/8-15px)] z-[1000] overflow-visible">
                 {pathname === '/blog' || pathname.startsWith('/blog/') ? (
-                  // 对于blog页面，直接放置Diagonal-BLOG.svg文件
+                  // 对于blog页面，使用Diagonal-BLOG.svg文件
                   <img
                     src="/Diagonal-BLOG.svg"
-                    alt="BLOG SVG"
+                    alt="BLOG Background"
                     style={{
                       // 设置明确的尺寸确保可见
                       height: '120px',
@@ -211,53 +216,78 @@ export function Header() {
                       zIndex: 1000
                     }}
                   />
+                ) : pathname === '/footprints' || pathname.startsWith('/footprints/') ? (
+                  // 对于footprints页面，使用对应的背景SVG文件
+                  <img
+                    src="/Diagonal-FOOTPRINTS.svg"
+                    alt="FOOTPRINTS Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
+                ) : pathname === '/collections' || pathname.startsWith('/collections/') ? (
+                  // 对于collections页面，使用对应的背景SVG文件
+                  <img
+                    src="/Diagonal-COLLECTIONS.svg"
+                    alt="COLLECTIONS Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
+                ) : pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? (
+                  // 对于guestbook页面，使用对应的背景SVG文件
+                  <img
+                    src="/Diagonal-GUESTBOOK.svg"
+                    alt="GUESTBOOK Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
+                ) : pathname === '/contact' || pathname.startsWith('/contact/') ? (
+                  // 对于contact页面，使用对应的背景SVG文件
+                  <img
+                    src="/Diagonal-CONTACT.svg"
+                    alt="CONTACT Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
+                ) : pathname === '/projects' || pathname.startsWith('/projects/') ? (
+                  // 对于projects页面，使用对应的背景SVG文件
+                  <img
+                    src="/Diagonal-PROJECTS.svg"
+                    alt="PROJECTS Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
                 ) : (
-                  // 对于其他页面，继续使用PNG纹理渲染
-                  <div style={{
-                    // 设置文字基础样式
-                    fontSize: '12rem',
-                    fontWeight: 'bold',
-                    fontFamily: 'ChillDuanSans_Bold.otf, sans-serif',
-                    // 使用PNG纹理图片作为背景
-                    backgroundImage: 'url(/Diagonal.png)',
-                    // 确保背景填充
-                    backgroundRepeat: 'repeat',
-                    // 调整背景大小以适应文字和提高渲染稳定性
-                    backgroundSize: '20px 20px',
-                    // 固定背景位置以减少缩放时的位移
-                    backgroundPosition: 'center',
-                    // 设置背景附着方式以提高稳定性
-                    backgroundAttachment: 'fixed',
-                    // 关键属性：将背景应用到文字上
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    // 增加浏览器兼容性前缀
-                    WebkitTextFillColor: 'transparent',
-
-                    // 设置文字透明以显示背景纹理
-                    color: 'transparent',
-                    // 确保纹理不会被截断
-                    overflow: 'visible',
-                    // 设置显示方式
-                    display: 'inline-block',
-                    // 提高文字渲染质量
-                    textRendering: 'optimizeLegibility',
-                    // 防止文本像素化
-                    imageRendering: "pixelated",
-                    // 添加硬件加速以提高性能和稳定性
-                    transform: 'translateZ(0)',
-                    // 防止抗锯齿问题
-                    willChange: 'transform',
-                    // 添加轻微轮廓以确保在任何缩放级别都能看到文字
-                    WebkitTextStroke: '0.5px rgba(0,0,0,0.1)'
-                  }}>
-                    {pathname === '/footprints' || pathname.startsWith('/footprints/') ? 'FOOTPRINTS' :
-                      pathname === '/collections' || pathname.startsWith('/collections/') ? 'COLLECTIONS' :
-                        pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? 'GUESTBOOK' :
-                          pathname === '/contact' || pathname.startsWith('/contact/') ? 'CONTACT' :
-                            pathname === '/projects' || pathname.startsWith('/projects/') ? 'PROJECTS' :
-                              'PAGE'}
-                  </div>
+                  // 其他页面使用默认背景图案
+                  <img
+                    src="/Diagonal-long.svg"
+                    alt="Default Background"
+                    style={{
+                      height: '120px',
+                      width: 'auto',
+                      display: 'block',
+                      zIndex: 1000
+                    }}
+                  />
                 )}
               </div>
             </motion.div>
