@@ -157,7 +157,8 @@ export function Header() {
   return (
     <>
       {/* 非首页顶部色块 - 白天模式使用#FEFE2B，黑夜模式使用#B0FA41，高度略微增大 */}
-      {!isHomePage && (
+      {/* 排除博客文章详情页面，只在博客列表页和其他页面显示 */}
+      {!isHomePage && !pathname.startsWith('/blog/') && (
         <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
           <div className="flex w-full max-w-7xl lg:px-8">
             <motion.div
@@ -170,6 +171,19 @@ export function Header() {
                 stiffness: 200,
               }}
             >
+              {/* 添加bg.png作为覆盖层背景装饰，并使其效果最明显 */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: 'url(/bg.png)',
+                  backgroundRepeat: 'repeat',
+                  backgroundSize: 'auto',
+                  opacity: 1, // 最大不透明度使其完全可见
+                  mixBlendMode: 'multiply', // 增强对比度
+                  filter: 'contrast(2) brightness(1.5) saturate(2)' // 最大化视觉效果
+                }}
+              />
+              
               {/* 移除了单独的黑色色块，因为它已经被融入到SVG中 */}
 
               {/* 页面名称 - 统一使用SVG替代文字 */}
