@@ -3,7 +3,7 @@ import './blog/[slug]/blog.css'
 import { Analytics } from '@vercel/analytics/react'
 import { Suspense } from 'react'
 
-import { Footer } from '~/app/(main)/Footer'
+import Footer from '~/app/(main)/Footer'
 import { Header } from '~/app/(main)/Header'
 import { QueryProvider } from '~/app/QueryProvider'
 
