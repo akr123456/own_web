@@ -1,4 +1,5 @@
 import React from 'react'
+'use server'
 
 import { CursorClickIcon, UsersIcon } from '~/assets'
 import { PeekabooLink } from '~/components/links/PeekabooLink'
