@@ -63,7 +63,7 @@ async function LastVisitorInfo() {
   )
 }
 
-export async function Footer() {
+export default function Footer() {
   return (
     <footer className="mt-32">
       <Container.Outer>
