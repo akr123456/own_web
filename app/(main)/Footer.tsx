@@ -1,12 +1,9 @@
-import { count, isNotNull } from 'drizzle-orm'
 import React from 'react'
 
 import { CursorClickIcon, UsersIcon } from '~/assets'
 import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { Container } from '~/components/ui/Container'
 import { kvKeys } from '~/config/kv'
-import { db } from '~/db'
-import { subscribers } from '~/db/schema'
 import { env } from '~/env.mjs'
 import { prettifyNumber } from '~/lib/math'
 import { redis } from '~/lib/redis'
