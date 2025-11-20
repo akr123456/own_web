@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await */
-
 import React from 'react'
 
 import { CursorClickIcon, UsersIcon } from '~/assets'
