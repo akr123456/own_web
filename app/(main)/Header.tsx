@@ -15,6 +15,7 @@ import {
   useMotionValue,
 } from 'framer-motion'
 import { usePathname } from 'next/navigation'
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 import { NavigationBar } from '~/app/(main)/NavigationBar'
