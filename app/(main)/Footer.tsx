@@ -1,5 +1,4 @@
 import React from 'react'
-'use server'
 
 import { CursorClickIcon, UsersIcon } from '~/assets'
 import { PeekabooLink } from '~/components/links/PeekabooLink'
@@ -9,6 +8,7 @@ import { env } from '~/env.mjs'
 import { prettifyNumber } from '~/lib/math'
 import { redis } from '~/lib/redis'
 
+// eslint-disable-next-line @typescript-eslint/require-await
 async function TotalPageViews() {
   let views: number
   if (env.VERCEL_ENV === 'production') {
@@ -34,6 +34,7 @@ type VisitorGeolocation = {
   flag: string
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 async function LastVisitorInfo() {
   let lastVisitor: VisitorGeolocation | undefined = undefined
   if (env.VERCEL_ENV === 'production') {
