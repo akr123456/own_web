@@ -11,8 +11,6 @@ import { env } from '~/env.mjs'
 import { prettifyNumber } from '~/lib/math'
 import { redis } from '~/lib/redis'
 
-import { Newsletter } from './Newsletter'
-
 async function TotalPageViews() {
   let views: number
   if (env.VERCEL_ENV === 'production') {
@@ -37,6 +35,7 @@ type VisitorGeolocation = {
   city?: string
   flag: string
 }
+
 async function LastVisitorInfo() {
   let lastVisitor: VisitorGeolocation | undefined = undefined
   if (env.VERCEL_ENV === 'production') {
@@ -68,13 +67,6 @@ async function LastVisitorInfo() {
 }
 
 export async function Footer() {
-  const [subs] = await db
-    .select({
-      subCount: count(),
-    })
-    .from(subscribers)
-    .where(isNotNull(subscribers.subscribedAt))
-
   return (
     <footer className="mt-32">
       <Container.Outer>
