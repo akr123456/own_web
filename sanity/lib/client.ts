@@ -20,7 +20,7 @@ class SafeClient {
   }
   
   // 包装fetch请求
-  async fetch<T = any>(query: string, params?: any): Promise<T | null> {
+  async fetch<T>(query: string, params?: any): Promise<T | null> {
     try {
       return await this.client.fetch<T>(query, params)
     } catch (error) {
