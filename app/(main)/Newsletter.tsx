@@ -11,6 +11,7 @@ import { z } from 'zod'
 
 import { TiltedSendIcon } from '~/assets'
 import { Button } from '~/components/ui/Button'
+import Image from 'next/image'
 
 const formId = '5108903'
 
@@ -107,13 +108,26 @@ export function Newsletter({ subCount }: { subCount?: string }) {
               className="min-w-0 flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5 sm:text-sm"
               {...register('email')}
             />
-            <Button
-              type="submit"
-              className="ml-2 flex-none"
-              disabled={isSubmitting}
-            >
-              订阅
-            </Button>
+            <div className="ml-2 relative flex-none">
+              {/* 使用next/image确保图片正确加载，缩小为原来的1/2 */}
+              <div className="absolute -inset-10 rounded-full opacity-50 -z-10">
+                <Image
+                  src="/avatarBg.png"
+                  alt="装饰背景"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              {/* 按钮使用不透明背景 */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="relative flex-none inline-flex items-center gap-2 justify-center rounded-lg py-2 px-3 text-sm font-semibold text-zinc-100 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900 active:text-zinc-100/70 dark:text-black dark:bg-zinc-200 dark:hover:bg-zinc-300 dark:active:bg-zinc-400 outline-offset-2 transition active:transition-none"
+              >
+                <span className="mr-1 inline-block w-1 h-1 bg-[#FEFE2B]"></span>订阅
+              </button>
+            </div>
           </motion.div>
         ) : (
           <motion.p

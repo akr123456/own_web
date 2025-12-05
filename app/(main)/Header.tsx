@@ -173,7 +173,7 @@ export function Header() {
               }}
             >
               {/* 添加bg.png作为覆盖层背景装饰，并使其效果最明显 */}
-              <div 
+              <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   backgroundImage: 'url(/bg.png)',
@@ -184,7 +184,7 @@ export function Header() {
                   filter: 'contrast(2) brightness(1.5) saturate(2)' // 最大化视觉效果
                 }}
               />
-              
+
               {/* 移除了单独的黑色色块，因为它已经被融入到SVG中 */}
 
               {/* 页面名称 - 统一使用SVG替代文字 */}
