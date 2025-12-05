@@ -4,14 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import va from '@vercel/analytics'
 import { clsxm } from '@zolplay/utils'
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useReward } from 'react-rewards'
 import { z } from 'zod'
 
 import { TiltedSendIcon } from '~/assets'
-import { Button } from '~/components/ui/Button'
-import Image from 'next/image'
 
 const formId = '5108903'
 
@@ -72,7 +71,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
   return (
     <form
       className={clsxm(
-        'relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40',
+        'relative rounded-2xl border border-zinc-100 bg-transparent p-6 transition-opacity dark:border-zinc-700/40 dark:bg-transparent',
         isSubmitting && 'pointer-events-none opacity-70'
       )}
       onSubmit={handleSubmit(onSubmit)}
