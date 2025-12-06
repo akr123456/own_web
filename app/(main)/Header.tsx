@@ -163,7 +163,7 @@ export function Header() {
         <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
           <div className="flex w-full max-w-7xl lg:px-8">
             <motion.div
-              className="h-[240px] w-full bg-[#FEFE2B] dark:bg-[#B0FA41] opacity-90 z-50 relative"
+              className="h-[240px] w-full bg-[#FEFE2B] dark:bg-[#FEFE2B] opacity-90 z-50 relative"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.9 }}
               transition={{

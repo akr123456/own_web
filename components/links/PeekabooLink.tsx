@@ -37,7 +37,7 @@ export function PeekabooLink({
       <RichLink
         href={href}
         className={clsxm(
-          'font-semibold text-zinc-800 hover:underline dark:text-zinc-100',
+          'font-semibold text-[#212121] hover:underline dark:text-zinc-100',
           className
         )}
         target="_blank"
@@ -58,7 +58,7 @@ export function PeekabooLink({
         <RichLink
           href={href}
           className={clsxm(
-            'font-semibold text-zinc-800 hover:underline dark:text-zinc-100',
+            'font-semibold text-[#212121] hover:underline dark:text-zinc-100',
             className
           )}
           target="_blank"

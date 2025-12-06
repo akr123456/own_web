@@ -25,7 +25,7 @@ export default function BlogLayout({
       {/* 覆盖层 - 使用指定的颜色和不透明度 */}
       <div className="fixed inset-0 flex justify-center sm:px-8">
         <div className="flex w-full max-w-7xl lg:px-8">
-          <div className="w-full bg-[rgba(245,245,245,0.8)] ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20" />
+          <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20" />
         </div>
       </div>
 
