@@ -51,7 +51,8 @@ function Founder() {
 
 export function Headline() {
   return (
-    <div className="max-w-2xl">
+    <div className="flex items-center justify-center">
+      <div className="max-w-2xl text-center">
       <motion.h1
         className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
         initial={{ opacity: 0, y: 30 }}
@@ -87,7 +88,7 @@ export function Headline() {
         </Balancer>
       </motion.p>
       <motion.div
-        className="mt-6 flex gap-6"
+        className="mt-6 flex gap-6 justify-center"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -130,6 +131,7 @@ export function Headline() {
           platform="mail"
         />
       </motion.div>
+      </div>
     </div>
   )
 }
