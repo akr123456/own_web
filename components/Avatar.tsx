@@ -43,7 +43,7 @@ function AvatarImage({
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsxm(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 shadow-[0_6px_18px_rgba(0,0,0,0.18)] dark:shadow-[0_6px_18px_rgba(0,0,0,0.45)]',
           large ? 'h-16 w-16' : 'h-9 w-9'
         )}
         priority

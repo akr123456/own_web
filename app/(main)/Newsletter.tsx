@@ -71,7 +71,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
   return (
     <form
       className={clsxm(
-        'relative rounded-2xl border border-zinc-100 bg-transparent p-6 transition-opacity dark:border-zinc-700/40 dark:bg-transparent',
+        'relative rounded-2xl bg-transparent p-6 transition-opacity dark:bg-transparent',
         isSubmitting && 'pointer-events-none opacity-70'
       )}
       onSubmit={handleSubmit(onSubmit)}
@@ -109,7 +109,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
             />
             <div className="ml-2 relative flex-none">
               {/* 使用next/image确保图片正确加载，缩小为原来的1/2 */}
-              <div className="absolute -inset-10 rounded-full opacity-50 -z-10">
+              <div className="absolute -inset-14 rounded-full opacity-50 -z-10">
                 <Image
                   src="/avatarBg.png"
                   alt="装饰背景"

@@ -20,8 +20,24 @@ export function Resume({ resume }: { resume: Resume[] }) {
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
-          <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+          <li key={roleIndex} className="relative flex items-center gap-4">
+            {/* 斜线纹理长圆形装饰 */}
+            <div className="pointer-events-none absolute inset-0">
+              <div
+                className="absolute left-[-12px] right-[-25px] top-1/2 h-16 -translate-y-1/2 rounded-full"
+                style={{
+                  backgroundImage:
+                    'repeating-linear-gradient(135deg, rgba(206,206,206,0.7) 0, rgba(206,206,206,0.7) 2px, transparent 2px, transparent 5px)',
+                  opacity: 0.6,
+                  filter: 'blur(0.2px)',
+                }}
+              />
+            </div>
+
+            <div
+              className="relative z-10 mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full dark:bg-zinc-800"
+              style={{ boxShadow: '0 0 0 3px #FEFE2B, 0 8px 18px rgba(0,0,0,0.08)' }}
+            >
               <Image
                 src={role.logo}
                 alt={role.company}
@@ -31,7 +47,7 @@ export function Resume({ resume }: { resume: Resume[] }) {
                 unoptimized
               />
             </div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
+            <dl className="relative z-10 flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">公司</dt>
               <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {role.company}

@@ -91,7 +91,7 @@ export function MouseFollowHero() {
         <h1 className="text-8xl sm:text-[7rem] md:text-[8rem] font-bold text-[#212121] dark:text-[#212121] text-center">
           HUANG
           <br />
-          XUE MING
+          XUEMING
         </h1>
       </div>
 
