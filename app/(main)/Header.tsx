@@ -383,7 +383,7 @@ export function Header() {
         </AnimatePresence>
         <div
           ref={headerRef}
-          className="top-0 z-10 h-16 pt-6"
+          className="top-0 z-10 h-16 pt-0"
           style={{
             position:
               'var(--header-position)' as React.CSSProperties['position'],
@@ -422,8 +422,7 @@ export function Header() {
                 </AnimatePresence>
               </motion.div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <NavigationBar.Mobile className="pointer-events-auto relative z-50 md:hidden" />
-                <NavigationBar.Desktop className="pointer-events-auto relative z-50 hidden md:block" />
+                {/* NavigationBar temporarily removed for rewrite */}
               </div>
               <motion.div
                 className="flex justify-end gap-3 md:flex-1"
@@ -455,6 +454,7 @@ export function Header() {
           </Container>
         </div>
       </motion.header>
+      <NavigationBar.Desktop />
       {isHomePage && <div className="h-[--content-offset]" />}
     </>
   )

@@ -1,41 +1,80 @@
 'use client'
 
-import { Popover, type PopoverProps, Transition } from '@headlessui/react'
 import { clsxm } from '@zolplay/utils'
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
+import { type IconProps } from '~/assets'
 import { navigationItems } from '~/config/nav'
+
+// Hook to detect scroll direction
+export function useScrollDirection() {
+  const [isVisible, setIsVisible] = React.useState(true)
+  const [lastScrollY, setLastScrollY] = React.useState(0)
+
+  React.useEffect(() => {
+    let ticking = false
+
+    const updateScroll = () => {
+      const scrollY = window.scrollY
+
+      // Show when at top or scrolling up
+      if (scrollY === 0 || scrollY < lastScrollY) {
+        setIsVisible(true)
+      } else if (scrollY > lastScrollY + 10) {
+        // Hide when scrolling down more than 10px
+        setIsVisible(false)
+      }
+
+      setLastScrollY(scrollY)
+      ticking = false
+    }
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScroll)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
+  return isVisible
+}
 
 function NavItem({
   href,
-  children,
+  icon: Icon,
+  text,
 }: {
   href: string
-  children: React.ReactNode
+  icon: React.ComponentType<IconProps>
+  text: string
 }) {
   const isActive = usePathname() === href
 
   return (
-    <li>
+    <li className="relative">
+      {/* 黄色书签背景 - 固定定位,完全遮挡背后的斜线 */}
+      {isActive && (
+        <div className="absolute -top-4 -bottom-3 -left-1 -right-1 bg-[#FAEA00] rounded-lg pointer-events-none" style={{ zIndex: 0, boxShadow: '0 4px 6px rgba(0,0,0,0.08), 0 -4px 6px rgba(0,0,0,0.08), 4px 0 6px rgba(0,0,0,0.08), -4px 0 6px rgba(0,0,0,0.08)' }} />
+      )}
       <Link
         href={href}
         className={clsxm(
-          'relative block whitespace-nowrap px-3 py-2 transition',
+          'relative block whitespace-nowrap px-5 py-2 transition duration-200',
           isActive
-            ? 'text-[#011EFF] dark:text-[#FEFE2B]'
-            : 'hover:text-[#011EFF] dark:hover:text-[#FEFE2B]'
+            ? 'text-black dark:text-black'
+            : 'text-white hover:text-gray-200'
         )}
+        title={text}
+        style={{ position: 'relative', zIndex: 10 }}
       >
-        {children}
-        {isActive && (
-          <motion.span
-            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-[#011EFF]/0 via-[#011EFF]/70 to-[#011EFF]/0 dark:from-[#FEFE2B]/0 dark:via-[#FEFE2B]/40 dark:to-[#FEFE2B]/0"
-            layoutId="active-nav-item"
-          />
-        )}
+        <Icon className="h-6 w-6" style={{ filter: 'drop-shadow(0 2px 4px rgba(33, 33, 33, 0.5))' }} />
       </Link>
     </li>
   )
@@ -43,149 +82,50 @@ function NavItem({
 
 function Desktop({
   className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const radius = useMotionValue(0)
-  const handleMouseMove = React.useCallback(
-    ({ clientX, clientY, currentTarget }: React.MouseEvent) => {
-      const bounds = currentTarget.getBoundingClientRect()
-      mouseX.set(clientX - bounds.left)
-      mouseY.set(clientY - bounds.top)
-      radius.set(Math.sqrt(bounds.width ** 2 + bounds.height ** 2) / 2.5)
-    },
-    [mouseX, mouseY, radius]
-  )
-  const background = useMotionTemplate`radial-gradient(${radius}px circle at ${mouseX}px ${mouseY}px, var(--spotlight-color) 0%, transparent 65%)`
+}: {
+  className?: string
+}) {
+  const isVisible = useScrollDirection()
 
   return (
-    <nav
-      onMouseMove={handleMouseMove}
+    <motion.div
       className={clsxm(
-        'group relative',
-        'rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90',
-        'shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md',
-        'dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10',
-        '[--spotlight-color:rgb(1 30 255 / 0.6)] dark:[--spotlight-color:rgb(254 254 43 / 0.07)]',
+        'fixed top-0 left-0 right-0 z-40 flex justify-center',
         className
       )}
-      {...props}
+      animate={{
+        y: isVisible ? 0 : -100,
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
-      {/* Spotlight overlay */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background }}
-        aria-hidden="true"
-      />
-
-      <ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
-        {navigationItems.map(({ href, text }) => (
-          <NavItem key={href} href={href}>
-            {text}
-          </NavItem>
-        ))}
-      </ul>
-    </nav>
+      <nav 
+        className="py-2 relative backdrop-blur-md rounded-b-lg"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(-45deg, transparent 0, transparent 1.67px, rgba(54, 54, 54, 0.15) 1px, rgba(54, 54, 54, 0.15) 2.8px)',
+          backgroundColor: 'hsla(0, 0%, 93%, 0.8)',
+          boxShadow: '0 0 20px rgba(0, 0, 0, 0.08)',
+        }}
+      >
+        <ul className="flex px-4">
+          {navigationItems.map(({ href, text, icon }, index) => (
+            <React.Fragment key={href}>
+              <NavItem href={href} icon={icon} text={text} />
+              {index < navigationItems.length - 1 && (
+                <li className="flex items-center px-0.5">
+                  <div className="w-px h-5 bg-white" />
+                </li>
+              )}
+            </React.Fragment>
+          ))}
+        </ul>
+      </nav>
+    </motion.div>
   )
 }
 
-function MobileNavItem({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
-        {children}
-      </Popover.Button>
-    </li>
-  )
-}
-
-function Mobile(props: PopoverProps<'div'>) {
-  return (
-    <Popover {...props}>
-      <Popover.Button className="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-yellow-500/80">
-        前往
-        {/* Chevron */}
-        <svg
-          viewBox="0 0 8 6"
-          aria-hidden="true"
-          className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"
-        >
-          <path
-            d="M1.75 1.75 4 4.25l2.25-2.5"
-            fill="none"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Popover.Button>
-      <Transition.Root>
-        <Transition.Child
-          as={React.Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Popover.Overlay className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur dark:bg-black/80" />
-        </Transition.Child>
-        <Transition.Child
-          as={React.Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-gradient-to-b from-zinc-100/75 to-white p-8 ring-1 ring-zinc-900/5 dark:from-zinc-900/50 dark:to-zinc-900 dark:ring-zinc-800"
-          >
-            <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="关闭菜单" className="-m-1 p-1">
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="h-6 w-6 text-zinc-500 dark:text-zinc-400"
-                >
-                  <path
-                    d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                站内导航
-              </h2>
-            </div>
-            <nav className="mt-6">
-              <ul className="-my-2 divide-y divide-zinc-500/20 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                {navigationItems.map(({ href, text }) => (
-                  <MobileNavItem key={href} href={href}>
-                    {text}
-                  </MobileNavItem>
-                ))}
-              </ul>
-            </nav>
-          </Popover.Panel>
-        </Transition.Child>
-      </Transition.Root>
-    </Popover>
-  )
+function Mobile() {
+  return null
 }
 
 export const NavigationBar = {
