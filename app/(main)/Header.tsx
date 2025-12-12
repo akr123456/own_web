@@ -157,9 +157,8 @@ export function Header() {
 
   return (
     <>
-      {/* 非首页顶部色块 - 白天模式使用#FEFE2B，黑夜模式使用#B0FA41，高度略微增大 */}
-      {/* 排除博客文章详情页面，只在博客列表页和其他页面显示 */}
-      {!isHomePage && !pathname.startsWith('/blog/') && (
+      {/* 非首页顶部色块 - 仅在blog页面显示 */}
+      {(pathname === '/blog' || pathname.startsWith('/blog/')) && (
         <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
           <div className="flex w-full max-w-7xl lg:px-8">
             <motion.div
@@ -187,26 +186,12 @@ export function Header() {
 
               {/* 移除了单独的黑色色块，因为它已经被融入到SVG中 */}
 
-              {/* 页面名称 - 统一使用SVG替代文字 */}
+              {/* 页面名称 - blog页面使用SVG */}
               <div className="absolute bottom-[0px] left-[calc(100%*1/8-20px)] z-[1001] overflow-visible">
-                {pathname === '/blog' || pathname.startsWith('/blog/') ? (
-                  <>
-                    <img src="/triangle.svg" alt="triangle" style={{ position: 'absolute', top: '-65px', left: '5px', zIndex: 1002, display: 'block', height: '100px', width: '100px' }} />
-                    <img src="/BLOG.svg" alt="BLOG" style={{ height: '100px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                  </>
-                ) : pathname === '/footprints' || pathname.startsWith('/footprints/') ? (
-                  <img src="/FOOTPRINTS.svg" alt="FOOTPRINTS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) : pathname === '/collections' || pathname.startsWith('/collections/') ? (
-                  <img src="/COLLECTIONS.svg" alt="COLLECTIONS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) : pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? (
-                  <img src="/GUESTBOOK.svg" alt="GUESTBOOK" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) : pathname === '/contact' || pathname.startsWith('/contact/') ? (
-                  <img src="/CONTACT.svg" alt="CONTACT" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) : pathname === '/projects' || pathname.startsWith('/projects/') ? (
-                  <img src="/PROJECTS.svg" alt="PROJECTS" style={{ height: '80px', width: 'auto', zIndex: 1001, display: 'block' }} />
-                ) : (
-                  'PAGE'
-                )}
+                <>
+                  <img src="/triangle.svg" alt="triangle" style={{ position: 'absolute', top: '-65px', left: '5px', zIndex: 1002, display: 'block', height: '100px', width: '100px' }} />
+                  <img src="/BLOG.svg" alt="BLOG" style={{ height: '100px', width: 'auto', zIndex: 1001, display: 'block' }} />
+                </>
               </div>
 
               {/* 向右下方移动与黑色色块上下居中对齐，并调整长度与黄色块一致 */}
@@ -214,96 +199,18 @@ export function Header() {
                 <img src="/Diagonal-long.svg" alt="Diagonal Long" className="h-40 w-full" />
               </div>
 
-              {/* 直接在页面上放置SVG文件 */}
+              {/* Blog页面的对角线装饰 */}
               <div className="absolute bottom-[30px] left-[calc(100%*1/8-15px)] z-[1000] overflow-visible">
-                {pathname === '/blog' || pathname.startsWith('/blog/') ? (
-                  // 对于blog页面，使用Diagonal-BLOG.svg文件
-                  <img
-                    src="/Diagonal-BLOG.svg"
-                    alt="BLOG Background"
-                    style={{
-                      // 设置明确的尺寸确保可见
-                      height: '120px',
-                      width: 'auto',
-                      // 确保SVG正确显示
-                      display: 'block',
-                      // 确保层级最高
-                      zIndex: 1000
-                    }}
-                  />
-                ) : pathname === '/footprints' || pathname.startsWith('/footprints/') ? (
-                  // 对于footprints页面，使用对应的背景SVG文件
-                  <img
-                    src="/Diagonal-FOOTPRINTS.svg"
-                    alt="FOOTPRINTS Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                ) : pathname === '/collections' || pathname.startsWith('/collections/') ? (
-                  // 对于collections页面，使用对应的背景SVG文件
-                  <img
-                    src="/Diagonal-COLLECTIONS.svg"
-                    alt="COLLECTIONS Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                ) : pathname === '/guestbook' || pathname.startsWith('/guestbook/') ? (
-                  // 对于guestbook页面，使用对应的背景SVG文件
-                  <img
-                    src="/Diagonal-GUESTBOOK.svg"
-                    alt="GUESTBOOK Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                ) : pathname === '/contact' || pathname.startsWith('/contact/') ? (
-                  // 对于contact页面，使用对应的背景SVG文件
-                  <img
-                    src="/Diagonal-CONTACT.svg"
-                    alt="CONTACT Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                ) : pathname === '/projects' || pathname.startsWith('/projects/') ? (
-                  // 对于projects页面，使用对应的背景SVG文件
-                  <img
-                    src="/Diagonal-PROJECTS.svg"
-                    alt="PROJECTS Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                ) : (
-                  // 其他页面使用默认背景图案
-                  <img
-                    src="/Diagonal-long.svg"
-                    alt="Default Background"
-                    style={{
-                      height: '120px',
-                      width: 'auto',
-                      display: 'block',
-                      zIndex: 1000
-                    }}
-                  />
-                )}
+                <img
+                  src="/Diagonal-BLOG.svg"
+                  alt="BLOG Background"
+                  style={{
+                    height: '120px',
+                    width: 'auto',
+                    display: 'block',
+                    zIndex: 1000
+                  }}
+                />
               </div>
             </motion.div>
           </div>

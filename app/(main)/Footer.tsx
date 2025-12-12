@@ -100,16 +100,16 @@ export default function Footer() {
         </div>
 
         {/* 新色块 - 宽度为灰色块的1/10，高度为原来的1/3 */}
-        <div className="h-1 bg-[#CECECE] w-1/10 flex justify-center items-center gap-0">
-          {/* 左侧粉色色块 - 宽度为色块的1/12 */}
+        <div className="h-1 bg-[#CECECE] w-full flex justify-center items-center gap-0">
+          {/* 左侧粉色色块 - 宽度加长 */}
           <div className="h-full w-1/12 bg-[#DE16CC]" />
           {/* 中间黄色分区 - 宽度为色块的1/12（原1/6的1/2） */}
           <div className="h-full w-1/12 bg-[#FEFE2B]" />
-          {/* 右侧绿色色块 - 宽度为色块的1/12 */}
+          {/* 右侧绿色色块 - 宽度加长 */}
           <div className="h-full w-1/12 bg-[#22EFAF]" />
         </div>
         {/* 页面底部长条 */}
-        <div className="h-8 bg-[#B3B3B3] w-full" />
+        <div className="h-8 bg-[#313131] w-full" />
       </Container.Outer>
     </footer>
   )

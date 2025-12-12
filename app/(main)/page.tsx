@@ -34,8 +34,8 @@ export default async function BlogHomePage() {
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-6 pt-6">
-            <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              <PencilSwooshIcon className="h-5 w-5 flex-none" />
+            <h2 className="flex items-center text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              <PencilSwooshIcon className="h-6 w-6 flex-none" />
               <span className="ml-2">近期文章</span>
             </h2>
             <BlogPosts />

@@ -64,9 +64,9 @@ function NavItem({
         <div className="absolute -top-4 -bottom-3 -left-1 -right-1 rounded-lg pointer-events-none" style={{ 
           zIndex: 0, 
           boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.6), 0 2px 6px rgba(0,0,0,0.18), 0 4px 8px rgba(0,0,0,0.14)',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='25' height='25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='25' height='25' fill='%23FAEA00'/%3E%3Cpath d='M 0 0 Q 8 6 12 10 Q 16 14 18 19 Q 21 22 25 25' fill='none' stroke='rgba(0,0,0,0.05)' stroke-width='1.3' stroke-linecap='round'/%3E%3Cpath d='M 0 15 Q 1 13 3 13 Q 7 15 10 24 Q 10.5 24.5 11 25' fill='none' stroke='rgba(0,0,0,0.12)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E")`,
-          backgroundSize: '25px 25px',
-          backgroundPosition: '0 100%',
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='25' height='25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='25' height='25' fill='%23FAEA00'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%23FAEA00'/%3E%3C/svg%3E")`,
+          backgroundSize: '25px 25px, 100% 100%',
+          backgroundPosition: '0 100%, 100% 100%',
           backgroundColor: '#FAEA00',
           backgroundRepeat: 'no-repeat',
         }} />

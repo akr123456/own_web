@@ -77,8 +77,8 @@ export function Newsletter({ subCount }: { subCount?: string }) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <input type="hidden" className="hidden" {...register('formId')} />
-      <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <TiltedSendIcon className="h-5 w-5 flex-none" />
+      <h2 className="flex items-center text-base font-semibold text-zinc-900 dark:text-zinc-100">
+        <TiltedSendIcon className="h-6 w-6 flex-none" />
         <span className="ml-2">动态更新</span>
       </h2>
       <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 md:text-sm">
@@ -122,7 +122,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="relative flex-none inline-flex items-center gap-2 justify-center rounded-lg py-2 px-3 text-sm font-semibold text-zinc-100 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900 active:text-zinc-100/70 dark:text-black dark:bg-zinc-200 dark:hover:bg-zinc-300 dark:active:bg-zinc-400 outline-offset-2 transition active:transition-none"
+                className="relative flex-none inline-flex items-center gap-2 justify-center rounded-lg py-2 px-3 text-sm font-semibold text-zinc-100 bg-[#383838] hover:bg-[#2f2f2f] active:bg-[#262626] active:text-zinc-100/70 dark:text-black dark:bg-zinc-200 dark:hover:bg-zinc-300 dark:active:bg-zinc-400 outline-offset-2 transition active:transition-none"
               >
                 <span className="mr-1 inline-block w-1 h-1 bg-[#FEFE2B]"></span>订阅
               </button>
