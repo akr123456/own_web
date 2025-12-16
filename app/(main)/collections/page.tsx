@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 
 import { Projects } from '~/app/(main)/projects/Projects'
 import { Container } from '~/components/ui/Container'
+import { BackgroundSetter } from './BackgroundSetter'
 
 const title = '我的收藏'
 const description =
@@ -22,7 +23,9 @@ export const metadata = {
 
 export default function CollectionsPage() {
   return (
-    <Container className="mt-32 sm:mt-48">
+    <>
+      <BackgroundSetter />
+      <Container className="mt-32 sm:mt-48">
       <header className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
           欢迎来到我的收藏
@@ -37,6 +40,7 @@ export default function CollectionsPage() {
         <Projects />
       </div>
     </Container>
+    </>
   )
 }
 

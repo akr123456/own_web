@@ -3,6 +3,7 @@ import Balancer from 'react-wrap-balancer'
 import { SocialLink } from '~/components/links/SocialLink'
 import { Container } from '~/components/ui/Container'
 
+import { BackgroundSetter } from './BackgroundSetter'
 import { BlogPosts } from './BlogPosts'
 
 const description =
@@ -25,6 +26,7 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <>
+      <BackgroundSetter />
       <Container className="mt-32 sm:mt-48">
         <header className="max-w-2xl pl-[18px] sm:pl-[34px]">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">

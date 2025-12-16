@@ -10,11 +10,14 @@ import { MouseFollowHero } from '~/components/MouseFollowHero'
 import { Container } from '~/components/ui/Container'
 import { getSettings } from '~/sanity/queries'
 
+import { BackgroundSetter } from './BackgroundSetter'
+
 export default async function BlogHomePage() {
   const settings = await getSettings()
 
   return (
     <>
+      <BackgroundSetter />
       {/* 鼠标跟随英雄区 */}
       <MouseFollowHero />
 
