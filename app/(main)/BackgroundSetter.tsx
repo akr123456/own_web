@@ -14,7 +14,7 @@ export function BackgroundSetter() {
     // 设置背景图片
     root.style.setProperty('--bg-color', 'transparent')
     root.style.backgroundColor = 'transparent'
-    root.style.backgroundImage = 'url("/bg.jpg")'
+    root.style.backgroundImage = 'url("/bg.png")'
     root.style.backgroundSize = 'cover'
     root.style.backgroundPosition = 'center'
     root.style.backgroundAttachment = 'fixed'

@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 
 import { Projects } from '~/app/(main)/projects/Projects'
 import { Container } from '~/components/ui/Container'
+
 import { BackgroundSetter } from './BackgroundSetter'
 
 const title = '我的收藏'
