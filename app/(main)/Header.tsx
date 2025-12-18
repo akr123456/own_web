@@ -171,18 +171,7 @@ export function Header() {
                 stiffness: 200,
               }}
             >
-              {/* 添加bg.png作为覆盖层背景装饰，并使其效果最明显 */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  backgroundImage: 'url(/bg.png)',
-                  backgroundRepeat: 'repeat',
-                  backgroundSize: 'auto',
-                  opacity: 1, // 最大不透明度使其完全可见
-                  mixBlendMode: 'multiply', // 增强对比度
-                  filter: 'contrast(2) brightness(1.5) saturate(2)' // 最大化视觉效果
-                }}
-              />
+              {/* 背景装饰已移除，只保留 SVG */}
 
               {/* 移除了单独的黑色色块，因为它已经被融入到SVG中 */}
 

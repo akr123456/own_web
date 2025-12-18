@@ -4,15 +4,24 @@ import { useEffect } from 'react'
 
 export function BackgroundSetter() {
   useEffect(() => {
-    const originalBgColor = document.documentElement.style.getPropertyValue('--bg-color')
-    const originalHtmlBg = document.documentElement.style.backgroundColor
-    
-    document.documentElement.style.setProperty('--bg-color', '#0280DB')
-    document.documentElement.style.backgroundColor = '#0280DB'
-    
+    const root = document.documentElement
+    const body = document.body
+    const originalBgColor = root.style.getPropertyValue('--bg-color') || ''
+    const originalHtmlBg = root.style.backgroundColor || ''
+    const originalBgImage = root.style.backgroundImage || ''
+    const originalBodyBgImage = body.style.backgroundImage || ''
+
+    root.style.setProperty('--bg-color', '#0F3DFF')
+    root.style.backgroundColor = '#0F3DFF'
+    // 确保不显示全局的 bg.jpg
+    root.style.backgroundImage = 'none'
+    body.style.backgroundImage = 'none'
+
     return () => {
-      document.documentElement.style.setProperty('--bg-color', originalBgColor)
-      document.documentElement.style.backgroundColor = originalHtmlBg
+      root.style.setProperty('--bg-color', originalBgColor)
+      root.style.backgroundColor = originalHtmlBg
+      root.style.backgroundImage = originalBgImage
+      body.style.backgroundImage = originalBodyBgImage
     }
   }, [])
 

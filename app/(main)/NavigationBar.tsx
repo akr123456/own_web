@@ -105,8 +105,11 @@ function Desktop({
       <nav 
         className="py-2 relative backdrop-blur-md rounded-b-lg"
         style={{
-          backgroundImage: 'repeating-linear-gradient(-45deg, transparent 0, transparent 1.85px, rgba(54, 54, 54, 0.15) 1.5px, rgba(54, 54, 54, 0.15) 3px)',
-          backgroundColor: 'rgba(179, 179, 179, 0)',
+          // 保留斜线纹理，同时叠加顶部白到底部灰的渐变以增强玻璃质感
+          backgroundImage: `repeating-linear-gradient(-45deg, transparent 0, transparent 1.85px, rgba(54,54,54,0.10) 1.5px, rgba(54,54,54,0.10) 3px),
+            linear-gradient(to bottom, rgba(243,243,243,0.50) 0%, rgba(220,220,220,0.35) 100%)`,
+          backgroundBlendMode: 'normal',
+          backgroundColor: 'transparent',
           boxShadow: '0 0 20px rgba(0, 0, 0, 0.08)',
         }}
       >
