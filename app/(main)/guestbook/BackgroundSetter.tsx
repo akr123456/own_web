@@ -7,8 +7,8 @@ export function BackgroundSetter() {
     const originalBgColor = document.documentElement.style.getPropertyValue('--bg-color')
     const originalHtmlBg = document.documentElement.style.backgroundColor
     
-    document.documentElement.style.setProperty('--bg-color', '#DE16CC')
-    document.documentElement.style.backgroundColor = '#DE16CC'
+    document.documentElement.style.setProperty('--bg-color', '#ff6400')
+    document.documentElement.style.backgroundColor = '#ff6400'
     
     return () => {
       document.documentElement.style.setProperty('--bg-color', originalBgColor)

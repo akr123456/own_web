@@ -74,7 +74,7 @@ export default function Footer() {
           <Container.Inner className="mb-12">
             <div className="flex flex-col items-center">
               <div className="text-[44px] font-black text-[#7C7C7C]">[ END ]</div>
-              <div className="text-lg font-medium text-[#7C7C7C] mt-2">如果你喜欢我的内容，不妨在首页订阅或在社媒与我互动！</div>
+              <div className="text-lg font-medium text-[#7C7C7C] mt-2 text-center">如果你喜欢我的内容，不妨在首页订阅或在社媒与我互动！</div>
             </div>
           </Container.Inner>
           <Container.Inner>

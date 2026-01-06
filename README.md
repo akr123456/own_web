@@ -34,6 +34,9 @@ pnpm install
 # 启动开发服务器
 pnpm dev
 
+# 或者
+npm run dev
+
 # 构建
 pnpm build
 ```

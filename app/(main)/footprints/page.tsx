@@ -1,13 +1,13 @@
 import { type Metadata } from 'next'
 
-import { Projects } from '~/app/(main)/projects/Projects'
+// Projects 在其它页面展示，足迹页不再重复渲染
+import ChinaMap from '~/components/ChinaMap'
 import { Container } from '~/components/ui/Container'
 
 import { BackgroundSetter } from './BackgroundSetter'
 
 const title = '我的足迹'
-const description =
-  '多年来，我一直在做各种各样的小项目，这里就是我筛选出来我觉得还不错的项目合集，也是我在技术领域中尝试和探索的最好见证。'
+const description = '我的旅行与到访记录；在 Sanity 中配置地点并启用地图高亮后，本页地图会反映相应省份的高亮与信息。'
 export const metadata = {
   title,
   description,
@@ -37,9 +37,11 @@ export default function FootprintsPage() {
             的，下面就是我筛选出来我觉得还不错的项目合集，也是我在技术领域中尝试和探索的最好见证。
           </p>
         </header>
-        <div className="mt-16 sm:mt-20">
-          <Projects />
+        <div className="mt-8 sm:mt-12">
+          <ChinaMap />
         </div>
+
+        {/* Projects 已移除 — 足迹页只展示地图和统计 */}
       </Container>
     </>
   )

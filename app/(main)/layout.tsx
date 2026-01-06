@@ -15,6 +15,8 @@ export default function BlogLayout({
   return (
     <>
 
+      {/* PageTransition temporarily removed */}
+
 
       {/* 顶部渐变效果（已移除，仅保留 SVG 装饰） */}
       {/* ...existing code... */}
