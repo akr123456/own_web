@@ -79,12 +79,18 @@ export default function ChinaMap() {
         const provinceKey = rawProvince.replace(/(省|市|自治区|特别行政区|回族自治区|维吾尔自治区|壮族自治区|自治州|州|盟|地区|县|区)$/u, '').trim().toLowerCase()
         // 找到 GeoJSON 中的真实名称；若找不到，仍使用原值
         const provinceName = featureNameMap[provinceKey] || rawProvince
-        const cityName = f.city || f.name || ''
-        const time = f.visitedAt || ''
+
+        // 对从 Sanity 返回的未知结构进行窄化处理，确保 cities 中的 name/time 是 string
+        const cityVal = f['city'] ?? f['name']
+        const cityName = typeof cityVal === 'string' ? cityVal : ''
+        const timeVal = f['visitedAt'] ?? f['time']
+        const time = typeof timeVal === 'string' ? timeVal : undefined
+        const mapColor = typeof f['mapColor'] === 'string' ? f['mapColor'] : undefined
+
         travelData[provinceName] = {
-          isVisited: !!f.mapHighlight || !!f.province,
+          isVisited: Boolean(f['mapHighlight']) || Boolean(f.province),
           cities: cityName ? [{ name: cityName, time }] : [],
-          mapColor: f.mapColor,
+          mapColor,
         }
       }
 
