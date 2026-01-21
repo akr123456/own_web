@@ -7,7 +7,16 @@ export default function ChinaMap() {
   type EChartsLike = { setOption: (opt: unknown) => void; resize: () => void; dispose: () => void }
   const chartRef = useRef<EChartsLike | null>(null)
   const [counts, setCounts] = useState({ visited: 0, total: 0, cities: 0 })
-  const [debugState, setDebugState] = useState({ echartsLoaded: false, geoLoaded: false, footprintsCount: 0, chartInit: false, containerW: 0, containerH: 0 })
+  const [debugState, setDebugState] = useState({
+    echartsLoaded: false,
+    geoLoaded: false,
+    footprintsCount: 0,
+    chartInit: false,
+    containerW: 0,
+    containerH: 0,
+    geoError: '',
+    echartsError: '',
+  })
 
   useEffect(() => {
     let disposed = false
@@ -24,13 +33,26 @@ export default function ChinaMap() {
         echarts = null
       }
 
-      if (!echarts) return
+      if (!echarts) {
+        try { setDebugState(s => ({ ...s, echartsError: 'echarts import failed' })) } catch (e) {}
+        return
+      }
 
       try { setDebugState(s => ({ ...s, echartsLoaded: true })) } catch (e) {}
 
-      // 使用阿里云的 GeoJSON（运行时拉取，避免把大文件放入仓库）
-      const resp = await fetch("https://geo.datav.aliyun.com/areas/bound/100000_full.json")
-      const chinaJson: unknown = await resp.json()
+      // 通过同源 API 代理加载 GeoJSON，避免浏览器直连上游产生 CORS/网络问题（Vercel 部署常见）
+      let chinaJson: unknown = null
+      try {
+        const resp = await fetch('/api/china-geojson')
+        if (!resp.ok) {
+          try { setDebugState(s => ({ ...s, geoError: `geo fetch failed: ${resp.status}` })) } catch (e) {}
+          return
+        }
+        chinaJson = await resp.json()
+      } catch (e) {
+        try { setDebugState(s => ({ ...s, geoError: 'geo fetch exception' })) } catch (e2) {}
+        return
+      }
 
       try { setDebugState(s => ({ ...s, geoLoaded: true })) } catch (e) {}
 
@@ -43,6 +65,7 @@ export default function ChinaMap() {
         echarts.registerMap("china", geo)
       } else {
         // 无效的 geojson 时中断
+        try { setDebugState(s => ({ ...s, geoError: 'invalid geojson' })) } catch (e) {}
         return
       }
       // 构建一个从规范化名字到 GeoJSON 中真实名字的映射，便于容错匹配
@@ -241,6 +264,8 @@ export default function ChinaMap() {
               <div style={{ fontWeight: 600, marginBottom: 6 }}>地图调试</div>
               <div>echarts: {String(debugState.echartsLoaded)}</div>
               <div>geoJSON: {String(debugState.geoLoaded)}</div>
+              {debugState.geoError ? <div>geoErr: {debugState.geoError}</div> : null}
+              {debugState.echartsError ? <div>echartsErr: {debugState.echartsError}</div> : null}
               <div>footprints: {debugState.footprintsCount}</div>
               <div>chart: {String(debugState.chartInit)}</div>
               <div>size: {debugState.containerW}×{debugState.containerH}</div>
