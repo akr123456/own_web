@@ -14,11 +14,12 @@ export default function ChinaMap() {
 
     async function init() {
       // 使用已安装的 echarts 包，避免依赖 CDN 被 CSP/CORS 阻止
-      let echarts: any | null = null
+      let echarts: (typeof import('echarts')) | null = null
       try {
         const echartsModule = await import('echarts')
-        // 某些打包器导出为 default
-        echarts = (echartsModule as any).default ?? echartsModule
+        const mod = echartsModule as unknown as Record<string, unknown>
+        const candidate = (mod['default'] ?? echartsModule) as typeof import('echarts')
+        echarts = candidate
       } catch (e) {
         echarts = null
       }
@@ -29,13 +30,21 @@ export default function ChinaMap() {
 
       // 使用阿里云的 GeoJSON（运行时拉取，避免把大文件放入仓库）
       const resp = await fetch("https://geo.datav.aliyun.com/areas/bound/100000_full.json")
-      const chinaJson = await resp.json()
+      const chinaJson: unknown = await resp.json()
 
       try { setDebugState(s => ({ ...s, geoLoaded: true })) } catch (e) {}
 
       if (disposed || !containerRef.current) return
 
-      echarts.registerMap("china", chinaJson)
+      // 运行时做最小的形状校验后再传入，避免把 `any` 传给严格类型的注册函数
+      type GeoJSONLike = { type?: string; features?: unknown[]; [k: string]: unknown }
+      if (typeof chinaJson === 'object' && chinaJson !== null) {
+        const geo = chinaJson as GeoJSONLike
+        echarts.registerMap("china", geo)
+      } else {
+        // 无效的 geojson 时中断
+        return
+      }
       // 构建一个从规范化名字到 GeoJSON 中真实名字的映射，便于容错匹配
       const featureNameMap: Record<string, string> = {}
       try {
@@ -206,7 +215,7 @@ export default function ChinaMap() {
       }
     }
 
-      const cleanPromise = init()
+      const cleanPromise: Promise<(() => void) | void> = init()
 
     return () => {
       disposed = true
