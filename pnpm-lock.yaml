@@ -131,6 +131,9 @@ importers:
       drizzle-orm:
         specifier: ^0.30.1
         version: 0.30.10(@neondatabase/serverless@0.9.5)(@types/pg@8.11.6)(@types/react@18.2.65)(react@18.3.1)
+      echarts:
+        specifier: ^6.0.0
+        version: 6.0.0
       edge-cors:
         specifier: ^0.2.1
         version: 0.2.1
@@ -5323,6 +5326,9 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
+  echarts@6.0.0:
+    resolution: {integrity: sha512-Tte/grDQRiETQP4xz3iZWSvoHrkCQtwqd6hs+mifXcjrCuo2iKWbajFObuLJVBlDIJlOzgQPd1hsaKt/3+OMkQ==}
+
   edge-cors@0.2.1:
     resolution: {integrity: sha512-ti3F5g96Dx99/+CCPuNpmN0gO5eIxMOTwyMMgNTpxs2rXsmpg6A76yVQZkaKVroWJfJeH6slRqL1HNE52yr5TA==}
 
@@ -9070,6 +9076,9 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
 
@@ -9712,6 +9721,9 @@ packages:
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+  zrender@6.0.0:
+    resolution: {integrity: sha512-41dFXEEXuJpNecuUQq6JlbybmnHaqqpGlbH1yxnA5V9MMP4SbohSVZsJIwz+zdjQXSSlR1Vc34EgH1zxyTDvhg==}
 
   zustand@5.0.8:
     resolution: {integrity: sha512-gyPKpIaxY9XcO2vSMrLbiER7QMAMGOQZVRdJ6Zi782jkbzZygq5GI9nG8g+sMgitRtndwaBSl7uiqC49o1SSiw==}
@@ -15204,6 +15216,11 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
+  echarts@6.0.0:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 6.0.0
+
   edge-cors@0.2.1: {}
 
   editorconfig@1.0.4:
@@ -19884,6 +19901,8 @@ snapshots:
 
   tslib@1.14.1: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.4.1: {}
 
   tslib@2.6.2: {}
@@ -20538,6 +20557,10 @@ snapshots:
       readable-stream: 4.7.0
 
   zod@3.25.76: {}
+
+  zrender@6.0.0:
+    dependencies:
+      tslib: 2.3.0
 
   zustand@5.0.8(@types/react@18.2.65)(immer@10.2.0)(react@18.3.1)(use-sync-external-store@1.6.0(react@18.3.1)):
     optionalDependencies:
