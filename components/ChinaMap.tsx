@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react"
 
+type EChartsModule = typeof import('echarts')
+
 export default function ChinaMap() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   type EChartsLike = { setOption: (opt: unknown) => void; resize: () => void; dispose: () => void }
@@ -23,12 +25,11 @@ export default function ChinaMap() {
 
     async function init() {
       // 使用已安装的 echarts 包，避免依赖 CDN 被 CSP/CORS 阻止
-      let echarts: (typeof import('echarts')) | null = null
+      let echarts: EChartsModule | null = null
       try {
         const echartsModule = await import('echarts')
         const mod = echartsModule as unknown as Record<string, unknown>
-        const candidate = (mod['default'] ?? echartsModule) as typeof import('echarts')
-        echarts = candidate
+        echarts = (mod['default'] ?? echartsModule) as EChartsModule
       } catch (e) {
         echarts = null
       }
@@ -62,7 +63,9 @@ export default function ChinaMap() {
       type GeoJSONLike = { type?: string; features?: unknown[]; [k: string]: unknown }
       if (typeof chinaJson === 'object' && chinaJson !== null) {
         const geo = chinaJson as GeoJSONLike
-        echarts.registerMap("china", geo)
+        // ECharts 期望 FeatureCollection；若上游缺失则兜底写入，随后强制断言为 MapInput
+        if (!geo.type) geo.type = 'FeatureCollection'
+        echarts.registerMap("china", geo as unknown as Parameters<EChartsModule['registerMap']>[1])
       } else {
         // 无效的 geojson 时中断
         try { setDebugState(s => ({ ...s, geoError: 'invalid geojson' })) } catch (e) {}
