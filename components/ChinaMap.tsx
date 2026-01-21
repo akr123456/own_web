@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react"
 export default function ChinaMap() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   type EChartsLike = { setOption: (opt: unknown) => void; resize: () => void; dispose: () => void }
-  type EChartsLib = { registerMap: (name: string, geoJson: unknown) => void; init: (el: HTMLElement) => EChartsLike }
   const chartRef = useRef<EChartsLike | null>(null)
   const [counts, setCounts] = useState({ visited: 0, total: 0, cities: 0 })
   const [debugState, setDebugState] = useState({ echartsLoaded: false, geoLoaded: false, footprintsCount: 0, chartInit: false, containerW: 0, containerH: 0 })
@@ -14,26 +13,17 @@ export default function ChinaMap() {
     let disposed = false
 
     async function init() {
-      // 仅通过 CDN 注入 echarts 并使用 window.echarts，避免构建时报错找不到模块
-      let echarts: EChartsLib | null = (window as unknown as { echarts?: EChartsLib }).echarts ?? null
-      if (!echarts) {
-        try {
-          await new Promise<void>((resolve, reject) => {
-            const s = document.createElement('script')
-            s.src = 'https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js'
-            s.async = true
-            s.onload = () => { echarts = (window as unknown as { echarts?: EChartsLib }).echarts ?? null; resolve() }
-            s.onerror = () => reject(new Error('Failed to load echarts from CDN'))
-            document.head.appendChild(s)
-          })
-        } catch (e) {
-          echarts = null
-        }
+      // 使用已安装的 echarts 包，避免依赖 CDN 被 CSP/CORS 阻止
+      let echarts: any | null = null
+      try {
+        const echartsModule = await import('echarts')
+        // 某些打包器导出为 default
+        echarts = (echartsModule as any).default ?? echartsModule
+      } catch (e) {
+        echarts = null
       }
 
-      if (!echarts) {
-        return
-      }
+      if (!echarts) return
 
       try { setDebugState(s => ({ ...s, echartsLoaded: true })) } catch (e) {}
 
