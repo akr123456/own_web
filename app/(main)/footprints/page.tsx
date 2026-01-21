@@ -1,10 +1,9 @@
 import { type Metadata } from 'next'
 
-// Projects 在其它页面展示，足迹页不再重复渲染
-import ChinaMap from '~/components/ChinaMap'
 import { Container } from '~/components/ui/Container'
 
 import { BackgroundSetter } from './BackgroundSetter'
+import ChinaMapClient from './ChinaMapClient'
 
 const title = '我的足迹'
 const description = '我的旅行与到访记录；在 Sanity 中配置地点并启用地图高亮后，本页地图会反映相应省份的高亮与信息。'
@@ -38,7 +37,7 @@ export default function FootprintsPage() {
           </p>
         </header>
         <div className="mt-8 sm:mt-12">
-          <ChinaMap />
+          <ChinaMapClient />
         </div>
 
         {/* Projects 已移除 — 足迹页只展示地图和统计 */}
