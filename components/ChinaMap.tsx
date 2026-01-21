@@ -8,6 +8,7 @@ export default function ChinaMap() {
   type EChartsLib = { registerMap: (name: string, geoJson: unknown) => void; init: (el: HTMLElement) => EChartsLike }
   const chartRef = useRef<EChartsLike | null>(null)
   const [counts, setCounts] = useState({ visited: 0, total: 0, cities: 0 })
+  const [debugState, setDebugState] = useState({ echartsLoaded: false, geoLoaded: false, footprintsCount: 0, chartInit: false, containerW: 0, containerH: 0 })
 
   useEffect(() => {
     let disposed = false
@@ -34,9 +35,13 @@ export default function ChinaMap() {
         return
       }
 
+      try { setDebugState(s => ({ ...s, echartsLoaded: true })) } catch (e) {}
+
       // 使用阿里云的 GeoJSON（运行时拉取，避免把大文件放入仓库）
       const resp = await fetch("https://geo.datav.aliyun.com/areas/bound/100000_full.json")
       const chinaJson = await resp.json()
+
+      try { setDebugState(s => ({ ...s, geoLoaded: true })) } catch (e) {}
 
       if (disposed || !containerRef.current) return
 
@@ -59,6 +64,8 @@ export default function ChinaMap() {
       const chart = echarts.init(containerRef.current)
       chartRef.current = chart
 
+      try { setDebugState(s => ({ ...s, chartInit: true })) } catch (e) {}
+
       // 先尝试从 Sanity API 获取动态的足迹数据（server route）
       let footprints: Array<Record<string, unknown>> = []
       try {
@@ -69,6 +76,8 @@ export default function ChinaMap() {
       } catch (e) {
         footprints = []
       }
+
+      try { setDebugState(s => ({ ...s, footprintsCount: footprints.length })) } catch (e) {}
 
       const travelData: Record<string, { isVisited: boolean; cities?: Array<{ name: string; time?: string }>; mapColor?: string }> = {}
 
@@ -189,6 +198,14 @@ export default function ChinaMap() {
       const totalProvinces = (chinaJson && chinaJson.features && chinaJson.features.length) || 34
       setCounts({ visited: visitedCount, total: totalProvinces, cities: citiesCount })
 
+      try {
+        const el = containerRef.current
+        if (el) {
+          const r = el.getBoundingClientRect()
+          setDebugState(s => ({ ...s, containerW: Math.round(r.width), containerH: Math.round(r.height) }))
+        }
+      } catch (e) {}
+
       const onResize = () => chart.resize()
       window.addEventListener("resize", onResize)
 
@@ -220,6 +237,16 @@ export default function ChinaMap() {
       <div className="bg-white p-4 rounded-2xl shadow-lg">
         <div style={{ overflow: 'hidden' }}>
           <div ref={containerRef} style={{ width: 'calc(100% + 40px)', height: 650, transform: 'translateX(40px)' }} />
+          <div style={{ position: 'relative' }}>
+            <div style={{ position: 'absolute', right: 12, top: 12, background: 'rgba(255,255,255,0.95)', border: '1px solid #e5e7eb', padding: '8px 10px', borderRadius: 8, fontSize: 12, color: '#111827', boxShadow: '0 4px 8px rgba(0,0,0,0.06)' }}>
+              <div style={{ fontWeight: 600, marginBottom: 6 }}>地图调试</div>
+              <div>echarts: {String(debugState.echartsLoaded)}</div>
+              <div>geoJSON: {String(debugState.geoLoaded)}</div>
+              <div>footprints: {debugState.footprintsCount}</div>
+              <div>chart: {String(debugState.chartInit)}</div>
+              <div>size: {debugState.containerW}×{debugState.containerH}</div>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 text-center border-t border-gray-200 pt-6">
